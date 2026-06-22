@@ -296,7 +296,7 @@ function MediaPanel({ project }: { project: Project }) {
   // Video only — stretches to fill full card height
   if (hasVideo) {
     return (
-      <VideoPanel src={project.demo} />
+      <VideoPanel src={project.demo!} />
     );
   }
 
