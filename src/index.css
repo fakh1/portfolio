@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 3% 88%;
+    --foreground: 48 14% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 48 14% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 48 14% 4%;
+    --primary: 318 79% 43%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 5% 96%;
+    --secondary-foreground: 48 14% 4%;
+    --muted: 40 5% 96%;
+    --muted-foreground: 48 2% 63%;
+    --accent: 318 79% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 69%;
+    --input: 0 0% 69%;
+    --ring: 318 79% 43%;
+    --radius: 0.625rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    background-color: #e2e1df;
+    color: #0e0e0c;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer components {
+  .accent-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 2s ease-in-out;
+  }
+
+  .accent-overlay.is-animating {
+    opacity: 1;
+  }
+
+  .accent-overlay span {
+    position: absolute;
+    display: block;
+    width: 200%;
+    top: 0;
+    bottom: 0;
+    left: -50%;
+    background-blend-mode: overlay;
+  }
+
+  .accent-overlay span:nth-child(1) {
+    background: conic-gradient(from 250deg at 25% 65%, rgba(196, 24, 156, 0.6), rgba(255, 100, 200, 0.15), rgba(196, 24, 156, 0.6));
+    mix-blend-mode: color-dodge;
+    animation: shine 7s ease-out forwards;
+  }
+  .accent-overlay span:nth-child(2) {
+    background: conic-gradient(from 230deg at 65% 20%, rgba(220, 40, 180, 0.6), rgba(255, 150, 220, 0.15), rgba(220, 40, 180, 0.6));
+    mix-blend-mode: color-dodge;
+    animation: shine 8s ease-out forwards;
+  }
+  .accent-overlay span:nth-child(3) {
+    background: conic-gradient(from 120deg at 50% 50%, rgba(255, 80, 200, 0.3), rgba(180, 20, 140, 0.15), rgba(255, 80, 200, 0.3));
+    mix-blend-mode: hard-light;
+    animation: shine 9s ease-out forwards;
+  }
+  .accent-overlay span:nth-child(4) {
+    background: conic-gradient(from 200deg at 80% 75%, rgba(196, 24, 156, 0.6), rgba(255, 120, 220, 0.15), rgba(196, 24, 156, 0.6));
+    mix-blend-mode: color-dodge;
+    animation: shine 10s ease-out forwards;
+  }
+  .accent-overlay span:nth-child(5) {
+    background: conic-gradient(from 280deg at 15% 30%, rgba(240, 60, 190, 0.6), rgba(255, 180, 230, 0.15), rgba(240, 60, 190, 0.6));
+    mix-blend-mode: color-dodge;
+    animation: shine 11s ease-out forwards;
+  }
+  .accent-overlay span:nth-child(6) {
+    background: conic-gradient(from 310deg at 50% 80%, rgba(220, 80, 180, 0.3), rgba(160, 0, 120, 0.15), rgba(220, 80, 180, 0.3));
+    mix-blend-mode: hard-light;
+    animation: shine 12s ease-out forwards;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent-overlay,
+  .accent-overlay span {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+.accent-overlay {
+  display: none !important;
+}
