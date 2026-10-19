@@ -113,8 +113,8 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href={import.meta.env.BASE_URL + "Ahmed_Fakhfakh_CV.pdf"}
-            download="Ahmed_Fakhfakh_CV.pdf"
+            href={import.meta.env.BASE_URL + "CV_Ahmed_Fakhfakh.pdf"}
+            download="CV_Ahmed_Fakhfakh.pdf"
             className="hero-btn px-6 py-2.5 rounded-full bg-white/10 text-white text-xs font-medium uppercase tracking-wide border border-white/20 hover:bg-white/[0.15] transition-colors"
           >
             Download CV
