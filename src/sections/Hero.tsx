@@ -79,7 +79,7 @@ export default function Hero() {
         <div className="hero-photo mb-6 relative">
           <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-accent via-fuchsia-500 to-cyan-400 opacity-70 blur-md" />
           <img
-            src="/images/ahmed-profile.png"
+            src={import.meta.env.BASE_URL + "images/ahmed-profile.png"}
             alt="Ahmed Fakhfakh"
             className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border border-white/20 shadow-2xl"
           />
@@ -113,8 +113,8 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="/Ahmed_Fakhfakh_CV.pdf"
-            download
+            href={import.meta.env.BASE_URL + "Ahmed_Fakhfakh_CV.pdf"}
+            download="Ahmed_Fakhfakh_CV.pdf"
             className="hero-btn px-6 py-2.5 rounded-full bg-white/10 text-white text-xs font-medium uppercase tracking-wide border border-white/20 hover:bg-white/[0.15] transition-colors"
           >
             Download CV

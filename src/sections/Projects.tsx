@@ -5,6 +5,8 @@ import { Github, Play, Image, FileText, ExternalLink, ChevronLeft, ChevronRight,
 
 gsap.registerPlugin(ScrollTrigger);
 
+const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
 interface Project {
   title: string;
   category: string;
@@ -15,6 +17,7 @@ interface Project {
   tech: string[];
   github?: string;
   demo?: string;
+  youtube?: string;
   screenshots?: string[];
   caseStudy?: string;
   buttons: { label: string; type: 'github' | 'demo' | 'screenshots' | 'casestudy' }[];
@@ -32,10 +35,9 @@ const projects: Project[] = [
       { value: '78%', label: 'Time Reduction' },
       { value: '210', label: 'Test Runs' },
     ],
+    youtube: 'https://www.youtube.com/embed/4VMszBoBd6M',
     tech: ['LangGraph', 'LangChain', 'Python', 'Robot Framework', 'FAISS', 'HITL'],
-    demo: '/videos/memory-agent-demo.mp4',
-    buttons: [
-    ],
+    buttons: [],
   },
   {
     title: 'Aspect-Based Sentiment Analysis with LoRA',
@@ -51,15 +53,15 @@ const projects: Project[] = [
     tech: ['DistilBERT', 'LoRA', 'PEFT', 'PyTorch', 'Streamlit', 'FastAPI'],
     github: 'https://github.com/fakh1/ABSA-Sentiment-Analysis',
     screenshots: [
-      '/screenshots/absa/1760884271598.jpg',
-      '/screenshots/absa/1760884269492.jpg',
-      '/screenshots/absa/1760884268470.jpg',
-      '/screenshots/absa/1760884267226.jpg',
-      '/screenshots/absa/1760884266605.jpg',
-      '/screenshots/absa/1760884266065.jpg',
-      '/screenshots/absa/1760884266024.jpg',
-      '/screenshots/absa/1760884262038.jpg',
-      '/screenshots/absa/1760884261539.jpg',
+      assetPath('screenshots/absa/1760884271598.jpg'),
+      assetPath('screenshots/absa/1760884269492.jpg'),
+      assetPath('screenshots/absa/1760884268470.jpg'),
+      assetPath('screenshots/absa/1760884267226.jpg'),
+      assetPath('screenshots/absa/1760884266605.jpg'),
+      assetPath('screenshots/absa/1760884266065.jpg'),
+      assetPath('screenshots/absa/1760884266024.jpg'),
+      assetPath('screenshots/absa/1760884262038.jpg'),
+      assetPath('screenshots/absa/1760884261539.jpg'),
     ],
     buttons: [
       { label: 'View GitHub', type: 'github' },
@@ -78,11 +80,10 @@ const projects: Project[] = [
     ],
     tech: ['GPT-4o-mini', 'LangChain', 'RAG', 'FAISS', 'JSONL', 'HITL'],
     screenshots: [
-      '/screenshots/finance-rag/chat-interface.png',
-      '/screenshots/finance-rag/analytics-dashboard.png',
+      assetPath('screenshots/finance-rag/chat-interface.png'),
+      assetPath('screenshots/finance-rag/analytics-dashboard.png'),
     ],
-    buttons: [
-    ],
+    buttons: [],
   },
   {
     title: 'RAG: Intelligent Document Q&A System',
@@ -98,7 +99,7 @@ const projects: Project[] = [
     tech: ['LangChain', 'GPT-3.5', 'FAISS', 'ChromaDB', 'FastAPI', 'Docker'],
     github: 'https://github.com/fakh1/RAG-PDF-QA',
     screenshots: [
-      '/screenshots/rag-qa/webapp-search.png',
+      assetPath('screenshots/rag-qa/webapp-search.png'),
     ],
     buttons: [
       { label: 'View GitHub', type: 'github' },
@@ -117,7 +118,7 @@ const projects: Project[] = [
     ],
     tech: ['YOLOv8', 'DeepSORT', 'Python', 'OpenCV', 'PyTorch', 'CUDA'],
     github: 'https://github.com/fakh1/VisioTrack-YOLOv8',
-    demo: '/videos/yolov8.mp4',
+    youtube: 'https://www.youtube.com/embed/gBGxhz7enBY',
     buttons: [
       { label: 'View GitHub', type: 'github' },
     ],
@@ -134,8 +135,9 @@ function getButtonIcon(type: string) {
   }
 }
 
-// ─── Inline Screenshot Carousel ───────────────────────────────────────────────
+
 function ScreenshotCarousel({ images, fullHeight = false }: { images: string[]; fullHeight?: boolean }) {
+
   const [current, setCurrent] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -149,7 +151,6 @@ function ScreenshotCarousel({ images, fullHeight = false }: { images: string[]; 
   return (
     <>
       <div className={containerClass}>
-        {/* Main image */}
         <img
           src={images[current]}
           alt={`Screenshot ${current + 1}`}
@@ -157,17 +158,14 @@ function ScreenshotCarousel({ images, fullHeight = false }: { images: string[]; 
           onClick={() => setLightbox(current)}
         />
 
-        {/* Label */}
         <span className="absolute top-4 left-4 px-3 py-1 rounded bg-black/50 text-white/70 text-xs font-medium pointer-events-none">
           Screenshots
         </span>
 
-        {/* Counter */}
         <span className="absolute top-4 right-4 px-3 py-1 rounded bg-black/50 text-white/70 text-xs font-medium pointer-events-none">
           {current + 1} / {images.length}
         </span>
 
-        {/* Arrows */}
         {images.length > 1 && (
           <>
             <button
@@ -187,7 +185,6 @@ function ScreenshotCarousel({ images, fullHeight = false }: { images: string[]; 
           </>
         )}
 
-        {/* Dots */}
         {images.length > 1 && (
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
             {images.map((_, i) => (
@@ -204,7 +201,6 @@ function ScreenshotCarousel({ images, fullHeight = false }: { images: string[]; 
         )}
       </div>
 
-      {/* Lightbox */}
       {lightbox !== null && (
         <div
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
@@ -250,7 +246,6 @@ function ScreenshotCarousel({ images, fullHeight = false }: { images: string[]; 
   );
 }
 
-// ─── Video Panel with codec error detection ───────────────────────────────────
 function VideoPanel({ src }: { src: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState(false);
@@ -264,7 +259,9 @@ function VideoPanel({ src }: { src: string }) {
           </div>
           <div className="text-center">
             <p className="text-white/80 text-sm font-medium mb-1">Video codec not supported</p>
-            <p className="text-white/40 text-xs mb-4">Re-encode with: <code className="text-accent">ffmpeg -i yolov8.mp4 -vcodec libx264 -acodec aac yolov8_fixed.mp4</code></p>
+            <p className="text-white/40 text-xs mb-4">
+              Re-encode with: <code className="text-accent">ffmpeg -i video.mp4 -vcodec libx264 -acodec aac fixed.mp4</code>
+            </p>
           </div>
         </div>
       ) : (
@@ -278,29 +275,38 @@ function VideoPanel({ src }: { src: string }) {
           onError={() => setError(true)}
         >
           <source src={src} type="video/mp4" />
-          <source src={src.replace('.mp4', '.webm')} type="video/webm" />
         </video>
       )}
     </div>
   );
 }
 
-// ─── Media Panel ──────────────────────────────────────────────────────────────
-// Project with demo        → video only, fills full left panel height
-// Project with screenshots → carousel fills full left panel height
-// No media                 → placeholder
+function YouTubePanel({ src }: { src: string }) {
+  return (
+    <div className="lg:w-[55%] self-stretch bg-black flex flex-col" style={{ minHeight: '360px' }}>
+      <iframe
+        src={src}
+        title="Project demo video"
+        className="w-full h-full flex-1"
+        style={{ minHeight: '360px' }}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  );
+}
+
 function MediaPanel({ project }: { project: Project }) {
-  const hasVideo = !!project.demo;
   const hasScreenshots = project.screenshots && project.screenshots.length > 0;
 
-  // Video only — stretches to fill full card height
-  if (hasVideo) {
-    return (
-      <VideoPanel src={project.demo!} />
-    );
+  if (project.youtube) {
+    return <YouTubePanel src={project.youtube} />;
   }
 
-  // Screenshots only — carousel stretches to fill full card height
+  if (project.demo) {
+    return <VideoPanel src={project.demo} />;
+  }
+
   if (hasScreenshots) {
     return (
       <div className="lg:w-[55%] self-stretch flex flex-col">
@@ -311,7 +317,6 @@ function MediaPanel({ project }: { project: Project }) {
     );
   }
 
-  // No media → placeholder
   return (
     <div className="lg:w-[55%] self-stretch relative min-h-[260px] bg-white/[0.03] overflow-hidden flex items-center justify-center">
       <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center">
@@ -321,7 +326,6 @@ function MediaPanel({ project }: { project: Project }) {
   );
 }
 
-// ─── Main Component ────────────────────────────────────────────────────────────
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -371,11 +375,8 @@ export default function Projects() {
               className="project-card w-full bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden"
             >
               <div className="flex flex-col lg:flex-row lg:items-stretch">
-
-                {/* ← Panneau média intelligent */}
                 <MediaPanel project={project} />
 
-                {/* Content */}
                 <div className="lg:w-[45%] p-6 md:p-8 flex flex-col">
                   <span className="self-start px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-medium">
                     {project.category}
@@ -404,7 +405,6 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Metrics */}
                   <div className="mt-4 flex flex-wrap gap-3">
                     {project.metrics.map((m) => (
                       <div
@@ -417,7 +417,6 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  {/* Tech stack */}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {project.tech.map((t) => (
                       <span
@@ -429,7 +428,6 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  {/* Buttons */}
                   <div className="mt-5 flex flex-wrap gap-3">
                     {project.buttons.map((btn) => (
                       <a
@@ -438,7 +436,9 @@ export default function Projects() {
                           btn.type === 'github'
                             ? project.github || '#'
                             : btn.type === 'demo'
-                            ? project.demo || '#'
+                            ? project.demo || project.youtube || '#'
+                            : btn.type === 'screenshots'
+                            ? project.screenshots?.[0] || '#'
                             : btn.type === 'casestudy'
                             ? project.caseStudy || '#'
                             : '#'

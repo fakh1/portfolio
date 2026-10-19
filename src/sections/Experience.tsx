@@ -7,6 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 const experiences = [
   {
     role: 'AI Engineer',
+    company: 'CFAC Group',
+    period: 'Jun 2026 – Oct 2026',
+    description: 'Designed AI chatbots and agent workflows integrated with Odoo ERP to automate HR, Finance, Audit, and IT operations. Built n8n automation pipelines for real-time orchestration and reporting, and deployed LLM engines, vector databases, and microservices with Docker across VMs and servers.',
+  },
+  {
+    role: 'AI Engineer',
     company: 'KPIT Technologies',
     period: 'Feb 2026 – Jun 2026',
     description: 'Designed agentic LangGraph workflows for automotive test generation and built a 4-layer memory architecture with Core Memory, Episodic Memory, HITL feedback, and FAISS vector memory.',
